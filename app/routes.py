@@ -1,17 +1,17 @@
+from app import app
+from flask import render_template, redirect, url_for, flash, session
+import app.data.data_resolver as data
+
 @app.route('/')
 def nothing():
     return redirect(url_for('index'))
 
 
-@app.route('/blog')
-def blog():
-    return render_template('blog.html', title="Blog")
-
-
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    form = WelcomeScreenForm()
-    if form.validate_on_submit():
-        return redirect(url_for('create'))
+    links = data.wp()
+    print(links)
+    fiut = "dupszczi"
+    return render_template('index.html', title='Start',
+                           links=links)
 
-    return render_template('index.html', title='Start', form=form)

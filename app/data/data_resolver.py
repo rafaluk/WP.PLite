@@ -1,14 +1,14 @@
-from downloader import Downloader
+from app.data.downloader import Downloader
 
 
-def main():
+def wp():
     dl = Downloader()
     dl.get_wp()
     print("wp fetched")
-    a = dl.get_news()
+    links = dl.get_news()
     print("news links extracted")
-    print(a)
+    return links
 
-
-if __name__ == '__main__':
-    main()
+#
+# if __name__ == '__main__':
+#     main()
