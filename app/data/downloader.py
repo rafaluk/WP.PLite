@@ -8,13 +8,11 @@ import requests
 # from selenium.webdriver.chrome.options import Options
 
 
-class Downloader():
+class Downloader:
     def __init__(self):
         self._content = None
         self._source = None
 
-
-    #todo: zrobic z tego get_content i z arguemntem source
     def get_wp(self):
         raw_site = requests.get("http://www.wp.pl").text.encode("utf-8")
         parsed_site = BeautifulSoup(raw_site, features="html.parser")
@@ -24,12 +22,11 @@ class Downloader():
 
     def get_news(self):
         """
-        :return: a dictionary of TITLE:LINK
+        :return: a list dictionaries: TITLE:LINK
         """
 
-        if self._content is None:
-            raise AssertionError("Content is empty! Get content first using get_wp or get_onet method.")
-        #todo: if source is none
+        if self._content is None or self._source is None:
+            raise AssertionError("Content is empty! Get the site first using get_wp method.")
 
         content = self._content
 
@@ -40,8 +37,8 @@ class Downloader():
             # this is a class for main news. it doesn't change over time.
             glonews_class = 'lclzf3-0'
 
-            #todo: ta struktura moze nie byc dobra, bo na onecie moze byc inaczej
-            slowniki = []
+            # TODO: this structure might not fit for other websites
+            dicts = []
 
             for header in headers:
 
@@ -54,8 +51,7 @@ class Downloader():
                         continue
                     link = a_area['href']
                     links[title] = link
-                slowniki.append(links)
+                dicts.append(links)
 
-        return slowniki
+        return dicts
 
-    
