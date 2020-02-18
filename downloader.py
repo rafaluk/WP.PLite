@@ -31,42 +31,31 @@ class Downloader():
             raise AssertionError("Content is empty! Get content first using get_wp or get_onet method.")
         #todo: if source is none
 
-        links_glowny, links_high, links_low = {}, {}, {}
+        content = self._content
 
         if self._source == 'wp':
-            content = self._content
+            # headers for different main news areas
+            headers = ['Glonews-glowny', 'Glonews-high', 'Glonews-low']
 
-
-            # take pierwszy news, take z niego class
-            # wyszukaj a_areas z tymi class
+            # this is a class for main news. it doesn't change over time.
             glonews_class = 'lclzf3-0'
-            glonews_glowny_areas = content.find_all("a", {'data-st-area': 'Glonews-glowny'})
 
-            # todo: delete multiredundancy!!!
-            #todo: change data fromat to list of tuples: [(title, link)]
-            for a_area in glonews_glowny_areas:
-                title = a_area.find_all('div', {'class': glonews_class})[0].get_text()
-                if len(title) > 100:
-                    continue
-                link = a_area['href']
-                links_glowny[title] = link
+            #todo: ta struktura moze nie byc dobra, bo na onecie moze byc inaczej
+            slowniki = []
 
-            glonews_high_areas = content.find_all("a", {'data-st-area': 'Glonews-high'})
+            for header in headers:
 
-            for a_area in glonews_high_areas:
-                title = a_area.find_all('div', {'class': glonews_class})[0].get_text()
-                if len(title) > 100:
-                    continue
-                link = a_area['href']
-                links_high[title] = link
+                glonews_areas = content.find_all("a", {'data-st-area': header})
+                links = {}
 
-            glonews_low_areas = content.find_all("a", {'data-st-area': 'Glonews-low'})
+                for a_area in glonews_areas:
+                    title = a_area.find_all('div', {'class': glonews_class})[0].get_text()
+                    if len(title) > 100:
+                        continue
+                    link = a_area['href']
+                    links[title] = link
+                slowniki.append(links)
 
-            for a_area in glonews_low_areas:
-                title = a_area.find_all('div', {'class': glonews_class})[0].get_text()
-                if len(title) > 100:
-                    continue
-                link = a_area['href']
-                links_low[title] = link
+        return slowniki
 
-        return links_glowny, links_high, links_low
+    
