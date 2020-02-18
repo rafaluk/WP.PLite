@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{title}}</title>
 </head>
 {% block app_content %}
-
 <body>
-
-{{ link }}
-
+    <h1>{{title}}</h1>
+    {% for paragraph in art %}
+        <p>{{paragraph}}</p>
+    {% endfor %}
+    <br><br>
+    Źródło: {{ link }}
 </body>
 {% endblock %}
 
