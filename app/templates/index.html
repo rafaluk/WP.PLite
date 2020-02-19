@@ -11,7 +11,7 @@
         <ul>
             {% for tit, link in links[0].items() %}
                 <li>
-                    <a href="{{link}}">{{ tit }}</a>
+                    <a href="{{ url_for('art', link=link) }}">{{ tit }}</a>
                 </li>
             {% endfor %}
         </ul>
@@ -29,7 +29,7 @@
         <ul>
             {% for tit, link in links[2].items() %}
                 <li>
-                    <a href="{{link}}">{{ tit }}</a>
+                    <a href="{{ url_for('art', link=link) }}">{{ tit }}</a>
                 </li>
             {% endfor %}
         </ul>
