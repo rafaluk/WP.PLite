@@ -29,6 +29,8 @@ class Downloader:
             raise AssertionError("Content is empty! Get the site first using get_wp method.")
 
         content = self._content
+        # TODO: this structure might not fit for other websites
+        dicts = []
 
         if self._source == 'wp':
             # headers for different main news areas
@@ -37,11 +39,7 @@ class Downloader:
             # this is a class for main news. it doesn't change over time.
             glonews_class = 'lclzf3-0'
 
-            # TODO: this structure might not fit for other websites
-            dicts = []
-
             for header in headers:
-
                 glonews_areas = content.find_all("a", {'data-st-area': header})
                 links = {}
 
@@ -50,6 +48,8 @@ class Downloader:
                     if len(title) > 100:
                         continue
                     link = a_area['href']
+                    if 'sportowefakty' in link:
+                        continue
                     links[title] = link
                 dicts.append(links)
 
