@@ -8,7 +8,3 @@ def wp():
     links = dl.get_news()
     print("news links extracted")
     return links
-
-#
-# if __name__ == '__main__':
-#     main()
