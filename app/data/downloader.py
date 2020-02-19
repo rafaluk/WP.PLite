@@ -1,12 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
 
-# import regex
-# import json
-# import time
-# from selenium import webdriver
-# from selenium.webdriver.chrome.options import Options
-
 
 class Downloader:
     def __init__(self):
@@ -21,15 +15,9 @@ class Downloader:
         return self._content
 
     def get_news(self):
-        """
-        :return: a list dictionaries: TITLE:LINK
-        """
-
-        if self._content is None or self._source is None:
-            raise AssertionError("Content is empty! Get the site first using get_wp method.")
 
         content = self._content
-        # TODO: this structure might not fit for other websites
+
         dicts = []
 
         if self._source == 'wp':
@@ -45,10 +33,14 @@ class Downloader:
 
                 for a_area in glonews_areas:
                     title = a_area.find_all('div', {'class': glonews_class})[0].get_text()
+                    # if title is too long, it probably contains some useless info
                     if len(title) > 100:
                         continue
                     link = a_area['href']
-                    if 'sportowefakty' in link:
+                    # exclude portals with videos or tons of useless content
+                    exclusions = ['sportowefakty', 'moneyv.wp.pl',
+                                  'wideo.wp.pl', 'o2.pl']
+                    if any(elem in link for elem in exclusions):
                         continue
                     links[title] = link
                 dicts.append(links)
