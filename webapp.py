@@ -1,6 +1,6 @@
 # this file enables flask to run.
 # first you should export flask variable:
-#    export FLASK_APP=application.py
+#    set FLASK_APP=webapp.py
 # (linux=export, windows cmd=set)
 # and run flask:
 #    flask run

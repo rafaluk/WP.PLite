@@ -39,9 +39,12 @@ class Downloader:
                     link = a_area['href']
                     # exclude portals with videos or tons of useless content
                     exclusions = ['sportowefakty', 'moneyv.wp.pl',
-                                  'wideo.wp.pl', 'o2.pl']
+                                  'wideo.wp.pl', 'o2.pl', 'pilot.wp.pl']
                     if any(elem in link for elem in exclusions):
                         continue
+                    if link[-1] == 'v':
+                        continue
+
                     links[title] = link
                 dicts.append(links)
 
