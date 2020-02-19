@@ -50,7 +50,6 @@ class TypicalWpExtractor(Extractor):
         flat_list.insert(0, lead)
         return flat_list
 
-
     def get_title(self):
         return self._parsed_site.find_all('h1', 'article--title',
                                           recursive=True)[0].get_text()

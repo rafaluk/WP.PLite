@@ -3,37 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>WP News Reader</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/art.css') }}">
 </head>
 {% block app_content %}
 <body>
 <h3>wp.pl - najnowsze newsy:</h3>
-    <li>Główne
-        <ul>
-            {% for tit, link in links[0].items() %}
-                <li>
-                    <a href="{{ url_for('art', link=link) }}">{{ tit }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </li>
-    <li>Wysokie
-        <ul>
-            {% for tit, link in links[1].items() %}
-                <li>
+    <div class="art">
+        <li>Główne
+            <ul>
+                {% for tit, link in links[0].items() %}
+                    <li>
                         <a href="{{ url_for('art', link=link) }}">{{ tit }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </li>
-    <li>Niskie
-        <ul>
-            {% for tit, link in links[2].items() %}
-                <li>
-                    <a href="{{ url_for('art', link=link) }}">{{ tit }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </li>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li>Wysokie
+            <ul>
+                {% for tit, link in links[1].items() %}
+                    <li>
+                            <a href="{{ url_for('art', link=link) }}">{{ tit }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li>Niskie
+            <ul>
+                {% for tit, link in links[2].items() %}
+                    <li>
+                        <a href="{{ url_for('art', link=link) }}">{{ tit }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    </div>
 </body>
 {% endblock %}
 </html>
