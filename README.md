@@ -19,3 +19,27 @@ The project has a form of a webapp, which has been developed only for my own por
 The web server and routing logic have been implemented using `Flask` framework.
 
 The links to articles and articles themselves have been extracted from HTML code (which had been previously obtained with `requests` library) using `BeautifulSoup4`.
+
+Simplified HLD looks as follows:
+![](wpplite.png)
+
+## Running the project
+After cloning all files and installing required dependencies (see: `requirements.txt`), navigate to the repo using command line and set the flask app variable:
+* Windows:
+```
+set FLASK_APP=webapp.py
+```
+
+* Linux:
+```
+export FLASK_APP=webapp.py
+```
+
+and run the app:
+* Windows/Linux:
+```
+flask run
+```
+
+## Exclusions
+Some of linked portals are too hard to scrape. Since there are so many articles on wp.pl I wasn't trying to get every possible article and some websites have been excluded (they are not displayed on the list).
